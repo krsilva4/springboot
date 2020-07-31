@@ -15,7 +15,7 @@ import br.com.vendas.domain.repository.Clientes;
 public class VendasApplication {
 	
 	@Bean
-	public CommandLineRunner init(@Autowired Clientes clientes) {
+	public CommandLineRunner  init(@Autowired Clientes clientes) {
 	
 		return args -> {
 			clientes.salvar(new Cliente(null,"Kenne"));
