@@ -1,6 +1,9 @@
 package br.com.vendas;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -9,49 +12,31 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import br.com.vendas.domain.entity.Cliente;
+import br.com.vendas.domain.entity.Pedido;
 import br.com.vendas.domain.repository.Clientes;
+import br.com.vendas.domain.repository.Pedidos;
 
 @SpringBootApplication
 public class VendasApplication {
 	
 	@Bean
-	public CommandLineRunner  init(@Autowired Clientes clientes) {
+	public CommandLineRunner  init(@Autowired Clientes clientes, 
+								   @Autowired Pedidos pedidos) {
 	
 		return args -> {
-			clientes.salvar(new Cliente(null,"Kenne"));
-			clientes.salvar(new Cliente(null,"Peppa"));
-			
-			List<Cliente> todosClientes = clientes.obterTodos();
-			
-			for(Cliente c : todosClientes) {
-				System.out.println(c.getNome());
-			}
-			
-			for(Cliente c : todosClientes) {
-				c.setNome(c.getNome() + "Atualizado!");
-				clientes.atualizar(c);
-			}
-			
-			todosClientes = clientes.obterTodos();
-			
-			for(Cliente c : todosClientes) {
-				System.out.println(c.getNome());
-			}
-			
-			todosClientes = clientes.buscarPorNome("Kenne");
-			
-			for(Cliente c : todosClientes) {
-				System.out.println(c.getNome());
-			}
-			
-			todosClientes = clientes.obterTodos();
-			todosClientes.forEach(c -> {
-				clientes.deletar(c);
-			});
-			
-			todosClientes = clientes.obterTodos();
-			todosClientes.forEach(System.out::println);
-			
+		Cliente cliente = clientes.save(new Cliente(null,"Kenne"));
+		Pedido pedido = new Pedido();
+		pedido.setCliente(cliente);
+		pedido.setDataPedido(LocalDate.now());
+		pedido.setTotal(BigDecimal.valueOf(100.00));
+		pedidos.save(pedido);
+		
+		System.out.println(clientes.findClienteFetchPedidos(cliente.getId()).getPedidos().toString());
+		Set<Pedido> pedidos2 = pedidos.findByCliente(cliente);
+		
+		for(Pedido p : pedidos2) {
+			System.out.println(p.getCliente().getNome());
+		}
 		};
 	}
 	
