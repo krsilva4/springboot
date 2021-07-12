@@ -51,10 +51,29 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		
+		<!-- devtools spring -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
+		
 		<!-- starter H2 -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
+		</dependency>
+		
+		<!-- starter lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+			<!-- validation -->
+		<dependency>
+		   <groupId>org.springframework.boot</groupId>
+   			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
 	</dependencies>
