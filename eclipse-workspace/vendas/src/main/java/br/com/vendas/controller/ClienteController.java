@@ -3,6 +3,8 @@ package br.com.vendas.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -39,7 +41,7 @@ public class ClienteController {
 
 	@PostMapping("/api/clientes")
 	@ResponseBody
-	public ResponseEntity save(@RequestBody Cliente cliente) {
+	public ResponseEntity save(@RequestBody @Valid Cliente cliente) {
 		Cliente clienteSalvo = clientes.save(cliente);
 		return ResponseEntity.ok(clienteSalvo);
 
@@ -58,7 +60,7 @@ public class ClienteController {
 
 	@PutMapping("/api/clientes/{id}")
 	@ResponseBody
-	public ResponseEntity update(@PathVariable Integer id, @RequestBody Cliente cliente) {
+	public ResponseEntity update(@PathVariable Integer id, @RequestBody @Valid Cliente cliente) {
 
 		return clientes.findById(id).map(clienteExistem -> {
 			cliente.setId(clienteExistem.getId());
