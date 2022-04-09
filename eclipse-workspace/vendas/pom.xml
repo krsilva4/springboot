@@ -70,17 +70,17 @@
 			<scope>provided</scope>
 		</dependency>
 		
-		<!-- validation -->
+	<!--	 validation
 		<dependency>
 		   <groupId>org.springframework.boot</groupId>
    			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 		
-		<!-- security -->
+		&lt;!&ndash; security &ndash;&gt;
 		<dependency>
 		   <groupId>org.springframework.boot</groupId>
    			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
+		</dependency>-->
 
 	</dependencies>
 
